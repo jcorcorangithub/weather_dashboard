@@ -1,4 +1,4 @@
-let cityInput = $("city-input");
+let cityInput = $("#city-input");
 
 $("#search-button").on("click", renderSearch);
 
@@ -20,7 +20,7 @@ function renderSearch(event){
         })
         .then(function(data){
             //console.log(data);
-            $("p").text("city weather " + city.weather);
+            $("p").text("city weather " + city);
         })
 }
 

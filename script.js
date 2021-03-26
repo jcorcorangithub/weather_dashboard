@@ -21,7 +21,10 @@ function renderSearch(event){
         .then(function(data){
             //console.log(data);
             $("p").text("city weather " + city);
+            //this is where more commands to display info will be placed
         })
 }
+
+
 
 

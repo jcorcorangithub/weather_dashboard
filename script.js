@@ -1,4 +1,6 @@
 let cityInput = $("#city-input");
+var cities = JSON.parse(localStorage.getItem("cities"));
+
 
 
 $("#search-button").on("click", renderSearch);
@@ -15,14 +17,10 @@ function renderSearch(event){
     fetch(url)
         .then(function (response){
             if(response.status != 200){
-                //change this so that it is not a window alert
                 alert("Invalid city");
                 return;
             }
-            //store searched cities into an array
-    
-            //localStorage.setItem("city"+city+"", city);
-            var cities = [];
+            
             cities.push(city);
             localStorage.setItem("cities", JSON.stringify(cities));
             
@@ -40,17 +38,32 @@ function renderSearch(event){
 
 function displayCities(){
     
-        var storedCities = JSON.parse(localStorage.getItem(cities));
-        for(i=0; i<cities.length; i++){
-            var city = storedCities[i];
-            $(".list-group").append("<a href='#' class='list-group-item list-group-item-action>'"+city+"</a>")
+        console.log(cities);
+        for(let i=0; i<cities.length; i++){
+            console.log(cities[i]);
+            let cityItem = $("<a></a>")
+            $(".list-group").append(cityItem);
+            cityItem.addClass('list-group-item list-group-item-action');
+            cityItem.attr("href", "#");
+            cityItem.text(cities[i]);
         }
 
-    // var city = localStorage.getItem(city);
-    // $(".list-group").append("<a href='#' class='list-group-item list-group-item-action>'"+city+"</a>")
+    
 }
 
+
+
 displayCities();
+
+function displayError(){
+    $("#city-input").val("please enter a valid country");
+    $("#city-input").css("color","red");
+
+    setTimeout(function(){
+        $("#city-input").val("");
+        $("#city-input").css("color","black");
+    },1500);
+}
 
 
 

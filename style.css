@@ -9,3 +9,7 @@
         outline: none;
         box-shadow: none;
     }
+
+    .list-group {
+        width: 30%;
+    }

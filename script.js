@@ -1,11 +1,13 @@
 let cityInput = $("#city-input");
 
+
 $("#search-button").on("click", renderSearch);
 
 
 function renderSearch(event){
     event.preventDefault();
 
+    
     let city = cityInput.val();
     
     let url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units=imperial&appid=1db5fbc9e14543777ea71f3e4b794636";
@@ -17,7 +19,15 @@ function renderSearch(event){
                 alert("Invalid city");
                 return;
             }
-            localStorage.setItem("city"+city+"", city);
+            //store searched cities into an array
+    
+            //localStorage.setItem("city"+city+"", city);
+            var cities = [];
+            cities.push(city);
+            localStorage.setItem("cities", JSON.stringify(cities));
+            
+
+
             return response.json();
         })
         .then(function(data){
@@ -28,14 +38,19 @@ function renderSearch(event){
 }
 
 
-//this will take info from local storage and display on page 
-//testing this stuff out. it currently works and adds that item
-//will probbaly use a loop to add items
 function displayCities(){
-    $(".list-group").append("<a href='#'' class='list-group-item list-group-item-action ''>test</a>")
+    
+        var storedCities = JSON.parse(localStorage.getItem(cities));
+        for(i=0; i<cities.length; i++){
+            var city = storedCities[i];
+            $(".list-group").append("<a href='#' class='list-group-item list-group-item-action>'"+city+"</a>")
+        }
+
+    // var city = localStorage.getItem(city);
+    // $(".list-group").append("<a href='#' class='list-group-item list-group-item-action>'"+city+"</a>")
 }
 
-addItem();
+displayCities();
 
 
 

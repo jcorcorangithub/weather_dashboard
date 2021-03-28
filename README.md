@@ -3,9 +3,9 @@ The goal of this project is to create an application that will allow a user to p
 
 
 link to application:
-
+https://jcorcorangithub.github.io/weather_dashboard/
 
 link to github repo:
-
+https://github.com/jcorcorangithub/weather_dashboard
 
 ![alt text](screenshot.jpg)

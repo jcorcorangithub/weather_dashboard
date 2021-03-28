@@ -9,7 +9,7 @@ function displayTime() {
 
 
 $("#search-button").on("click", renderSearch);
-
+$(".list-group-item").on("click", cityInput.text("list-group-item.val"));
 
 function renderSearch(event){
     event.preventDefault();

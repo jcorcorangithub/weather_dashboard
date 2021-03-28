@@ -1,4 +1,6 @@
-
+    #search-area {
+        width: 50%;
+    }
 
     .form-control-borderless {
         border: none;

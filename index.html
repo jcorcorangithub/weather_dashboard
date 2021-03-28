@@ -18,34 +18,69 @@
 </head>
 <body>
 
-  <div class="col-12 col-md-10 col-lg-8">
-    <form class="card card-sm">
-        <div class="card-body row no-gutters align-items-center">
-            <div class="col-auto">
-                <i class="fas fa-search h4 text-body"></i>
+    <div class="col-12 col-md-10 col-lg-8" id="search-area">
+        <form class="card card-sm">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="fas fa-search h4 text-body"></i>
+                </div>
+                <!--end of col-->
+                <div class="col">
+                    <input class="form-control form-control-lg form-control-borderless" id="city-input" type="search" placeholder="enter a city">
+                </div>
+                <!--end of col-->
+                <div class="col-auto">
+                    <button class="btn btn-lg btn-success"  id="search-button" type="submit">Search</button>
+                </div>
+                <!--end of col-->
             </div>
-            <!--end of col-->
-            <div class="col">
-                <input class="form-control form-control-lg form-control-borderless" id="city-input" type="search" placeholder="Search topics or keywords">
+        </form>
+    </div>
+
+
+    <div class="list-group">
+        <h2>previously searched cities</h2>
+        <!-- this is where the previously searched cities will generate -->
+    </div>
+
+    <div class="weather-display">
+        <div class="row">
+            <div class=col-12>
+                <p class="city-name"></p>
             </div>
-            <!--end of col-->
-            <div class="col-auto">
-                <button class="btn btn-lg btn-success"  id="search-button" type="submit">Search</button>
-            </div>
-            <!--end of col-->
         </div>
-    </form>
-</div>
+        <div class="row">
+            <div class=col-12>
+                <p class="date"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class=col-12>
+                <p class="weather-icon"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class=col-12>
+                <p class="temperature"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class=col-12>
+                <p class="humidity"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class=col-12>
+                <p class="wind-speed"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class=col-12>
+                <p class="uv-index"></p>
+            </div>
+        </div>
 
-
-<div class="list-group">
-    <h2>previously searched cities</h2>
-    <!-- this is where the previously searched cities will generate -->
-  </div>
-
-  <div class="weather-display">
-
-</div>
+    </div>
     
 
 

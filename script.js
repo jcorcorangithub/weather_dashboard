@@ -1,4 +1,5 @@
 let cityInput = $("#city-input");
+let citiesA = [];
 var cities = JSON.parse(localStorage.getItem("cities"));
 
 
@@ -18,26 +19,40 @@ function renderSearch(event){
         .then(function (response){
             if(response.status != 200){
                 alert("Invalid city");
+                //displayError();
                 return;
             }
+
+            if(!cities.includes(city)){
+                cities.push(city);
+            } 
             
-            cities.push(city);
             localStorage.setItem("cities", JSON.stringify(cities));
             
-
-
             return response.json();
         })
         .then(function(data){
             console.log(data);
-            $(".weather-display").text(city+" weather "+data.main.temp+" farenheit");
-            //this is where more commands to display info will be placed
+            //this will be the main display
+            $(".city-name").text(city);
+            $(".date").text("date");
+            $(".weather-icon").text(data.weather[0].id);
+            $(".temperature").text(data.main.temp+" farenheit");
+            $(".humidity").text("humidity is "+data.main.humidity+" %");
+            $(".wind-speed").text("wind speed is "+data.wind.speed+" mph");
+            $(".uv-index").text("uv-index");
         })
 }
 
+previouslySearchedCities();
 
-function displayCities(){
+
+
+
+
+function previouslySearchedCities(){
     
+        // var storedCities = JSON.parse(localStorage.getItem("cities"));
         console.log(cities);
         for(let i=0; i<cities.length; i++){
             console.log(cities[i]);
@@ -52,11 +67,8 @@ function displayCities(){
 }
 
 
-
-displayCities();
-
 function displayError(){
-    $("#city-input").val("please enter a valid country");
+    $("#city-input").val("please enter a valid city");
     $("#city-input").css("color","red");
 
     setTimeout(function(){

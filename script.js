@@ -1,6 +1,7 @@
 let cityInput = $("#city-input");
 let citiesA = [];
 var cities = JSON.parse(localStorage.getItem("cities"));
+let cityItem = $("<a></a>");
 
 function displayTime() {
     return moment().format('MMM DD, YYYY');
@@ -9,7 +10,10 @@ function displayTime() {
 
 
 $("#search-button").on("click", renderSearch);
-$(".list-group-item").on("click", cityInput.text("list-group-item.val"));
+
+//this is supposed to fill the search box with the clicked item
+$("cityItem").on("click", cityInput.val(cityItem.text()));
+
 
 function renderSearch(event){
     event.preventDefault();
@@ -59,11 +63,18 @@ function previouslySearchedCities(){
         console.log(cities);
         for(let i=0; i<cities.length; i++){
             console.log(cities[i]);
-            let cityItem = $("<a></a>")
+            // let cityItem = $("<a></a>")
+            // $(".list-group").append(cityItem);
+            // cityItem.addClass('list-group-item list-group-item-action');
+            // cityItem.attr("href", "#");
+            // cityItem.text(cities[i]);
+            // $(cityItem).on("click", cityInput.val("zzz"));
+
+            let cityItem = $("<li>")
             $(".list-group").append(cityItem);
-            cityItem.addClass('list-group-item list-group-item-action');
-            cityItem.attr("href", "#");
             cityItem.text(cities[i]);
+            cityItem.addClass('list-group-item list-group-item-action');
+            
         }
 
     

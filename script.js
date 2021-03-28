@@ -2,6 +2,10 @@ let cityInput = $("#city-input");
 let citiesA = [];
 var cities = JSON.parse(localStorage.getItem("cities"));
 
+function displayTime() {
+    return moment().format('MMM DD, YYYY');
+  }
+
 
 
 $("#search-button").on("click", renderSearch);
@@ -9,9 +13,8 @@ $("#search-button").on("click", renderSearch);
 
 function renderSearch(event){
     event.preventDefault();
-
     
-    let city = cityInput.val();
+    let city = cityInput.val().toLowerCase();
     
     let url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units=imperial&appid=1db5fbc9e14543777ea71f3e4b794636";
 
@@ -22,7 +25,7 @@ function renderSearch(event){
                 //displayError();
                 return;
             }
-
+            //if the city is already stored it wont add a repeat
             if(!cities.includes(city)){
                 cities.push(city);
             } 
@@ -35,8 +38,8 @@ function renderSearch(event){
             console.log(data);
             //this will be the main display
             $(".city-name").text(city);
-            $(".date").text("date");
-            $(".weather-icon").text(data.weather[0].id);
+            $(".date").text(displayTime);
+            $(".weather-icon").text("condition are "+data.weather[0].main+" img");
             $(".temperature").text(data.main.temp+" farenheit");
             $(".humidity").text("humidity is "+data.main.humidity+" %");
             $(".wind-speed").text("wind speed is "+data.wind.speed+" mph");

@@ -1,5 +1,5 @@
 let cityInput = $("#city-input");
-let citiesA = [];
+
 var cities = JSON.parse(localStorage.getItem("cities"));
 let cityItem = $("<a></a>");
 
@@ -28,6 +28,9 @@ function renderSearch(event){
                 alert("Invalid city");
                 //displayError();
                 return;
+            }
+            if(cities == null){
+                cities = [];
             }
             //if the city is already stored it wont add a repeat
             if(!cities.includes(city)){

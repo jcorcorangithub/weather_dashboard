@@ -15,10 +15,6 @@ $("#search-button").on("click", function(){
     renderSearch();
 });
 
-//this is supposed to fill the search box with the clicked item
-//$("cityItem").on("click", cityInput.val(cityItem.text()));
-
-
 function renderSearch(){
     event.preventDefault();
 
@@ -29,13 +25,13 @@ function renderSearch(){
     let error = false;
     fetch(url)
         .then(function (response){
-                if(response.status != 200){
-                    displayError();
-                    error = true;
-                    return error;
-                } else {
-                    return response.json();
-                }
+            if(response.status != 200){
+                displayError();
+                error = true;
+                return error;
+            } else {
+                return response.json();
+            }
         })
         .then(function(data){
             if(error == true){
@@ -48,17 +44,13 @@ function renderSearch(){
             //if the city is already stored it wont add a repeat
             if(!cities.includes(city)){
                 cities.push(city);
+                //the next few lines will create a button/list item after the fetch has been completed 
                 let cityItem = $("<li>")
                 $(".list-group").append(cityItem);
                 cityItem.text(city);
                 cityItem.addClass('list-group-item list-group-item-action');
             } 
-            
             localStorage.setItem("cities", JSON.stringify(cities));
-
-            //this will create a button/list item after the fetch has been completed 
-            
-            
             //this will be the main display
             $(".city-name").text(city);
             $(".date").text(displayTime);

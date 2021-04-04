@@ -1,26 +1,31 @@
-let cityInput = $("#city-input");
+let cityInput;
 
 var cities = JSON.parse(localStorage.getItem("cities"));
 let cityItem = $("<a></a>");
 
+//need to decide what to do with this
 function displayTime() {
     return moment().format('MMM DD, YYYY');
   }
 
 
 
-$("#search-button").on("click", renderSearch);
+$("#search-button").on("click", function(){
+    cityInput = $("#city-input").val().toLowerCase();
+    renderSearch();
+});
 
 //this is supposed to fill the search box with the clicked item
-$("cityItem").on("click", cityInput.val(cityItem.text()));
+//$("cityItem").on("click", cityInput.val(cityItem.text()));
 
 
-function renderSearch(event){
+function renderSearch(){
     event.preventDefault();
+
+    let city = cityInput;
     
-    let city = cityInput.val().toLowerCase();
-    
-    let url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units=imperial&appid=1db5fbc9e14543777ea71f3e4b794636";
+    let url = "http://api.openweathermap.org/data/2.5/weather?q="+city+
+    "&units=imperial&appid=1db5fbc9e14543777ea71f3e4b794636";
     let error = false;
     fetch(url)
         .then(function (response){
@@ -36,22 +41,23 @@ function renderSearch(event){
             if(error == true){
                 return;
             }
-            error = false;
+            //error = false;
             if(cities == null){
                 cities = [];
             }
             //if the city is already stored it wont add a repeat
             if(!cities.includes(city)){
                 cities.push(city);
+                let cityItem = $("<li>")
+                $(".list-group").append(cityItem);
+                cityItem.text(city);
+                cityItem.addClass('list-group-item list-group-item-action');
             } 
             
             localStorage.setItem("cities", JSON.stringify(cities));
 
             //this will create a button/list item after the fetch has been completed 
-            let cityItem = $("<li>")
-            $(".list-group").append(cityItem);
-            cityItem.text(city);
-            cityItem.addClass('list-group-item list-group-item-action');
+            
             
             //this will be the main display
             $(".city-name").text(city);
@@ -69,14 +75,19 @@ function renderSearch(event){
 
 previouslySearchedCities();
 function previouslySearchedCities(){
+    if(cities != null){
         for(let i=0; i<cities.length; i++){
             let cityItem = $("<li>")
             $(".list-group").append(cityItem);
             cityItem.text(cities[i]);
             cityItem.addClass('list-group-item list-group-item-action');
+            cityItem.attr("data-city", cities[i]);
         }
-
-    
+        $(".list-group-item").on("click", function(){
+            cityInput = $(this).attr("data-city");
+            renderSearch();
+        })
+    } 
 }
 
 function displayError(){

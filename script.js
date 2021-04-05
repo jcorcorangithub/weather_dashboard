@@ -16,6 +16,7 @@ $("#search-button").on("click", function(){
 });
 
 function renderSearch(){
+    //without this preventdefault, searches completed via the search button do not work
     event.preventDefault();
 
     let city = cityInput;

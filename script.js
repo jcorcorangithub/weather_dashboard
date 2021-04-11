@@ -16,7 +16,7 @@ $("#search-button").on("click", function(){
 });
 
 function renderSearch(){
-    //without this preventdefault, searches completed via the search button do not workd
+    //without this preventdefault, searches completed via the search button did not work
     event.preventDefault();
 
     let city = cityInput;
@@ -38,7 +38,6 @@ function renderSearch(){
             if(error == true){
                 return;
             }
-            //error = false;
             if(cities == null){
                 cities = [];
             }

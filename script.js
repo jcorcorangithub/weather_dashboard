@@ -21,7 +21,7 @@ function renderSearch(){
 
     let city = cityInput;
     
-    let url = "http://api.openweathermap.org/data/2.5/weather?q="+city+
+    let url = "https://api.openweathermap.org/data/2.5/weather?q="+city+
     "&units=imperial&appid=1db5fbc9e14543777ea71f3e4b794636";
     let error = false;
     fetch(url)
